@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "b1UwP0EyiMnGhB3b+2eSlpKHgpsghUjZ1+6Ftd6xCXo=",
+  "Source": "UrlShortenerApi",
+  "BasePath": "_content/UrlShortenerApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
