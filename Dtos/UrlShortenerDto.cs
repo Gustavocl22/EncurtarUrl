@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+
 public class UrlShortenerDto
 {
     [Required]

@@ -31,7 +31,7 @@ public class UrlShortenerController : ControllerBase
         var urlShortener = new UrlShortener
         {
             OriginalUrl = urlShortenerDto.OriginalUrl,
-            ShortenedUrl = GenerateShortenedUrl(),
+            ShortenedUrl = GenerateShortenedUrl(), 
             Clicks = 0
         };
 
@@ -40,9 +40,9 @@ public class UrlShortenerController : ControllerBase
             await _context.UrlShorteners.AddAsync(urlShortener);
             await _context.SaveChangesAsync();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            return StatusCode(500, $"Internal server error: {ex.Message}");
+            return StatusCode(500, "Internal server error.");
         }
 
         return Ok(new { shortenedUrl = urlShortener.ShortenedUrl });
