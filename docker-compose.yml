@@ -2,9 +2,9 @@ version: '3.8'
 
 services:
   db:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server2019-latest
     environment:
-      - SA_PASSWORD=Gustavocl#22
+      - SA_PASSWORD=SpmZPxvsKcgZ
       - ACCEPT_EULA=Y
       - MSSQL_DATABASE=UrlShortenerDb  
     ports:
