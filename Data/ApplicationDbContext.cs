@@ -6,3 +6,4 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<UrlShortener> UrlShorteners { get; set; }
 }
+  
