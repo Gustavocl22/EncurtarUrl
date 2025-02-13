@@ -1,12 +1,37 @@
 version: '3.8'
 
 services:
-  db:
-    image: mcr.microsoft.com/mssql/server2019-latest
+  app:
+    container_name: urlshortener-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
     environment:
-      - SA_PASSWORD=SpmZPxvsKcgZ
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - sqlserver
+    networks:
+      - banco-network
+
+  sqlserver:
+    container_name: sqlserverdb
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - MSSQL_SA_PASSWORD=${SA_PASSWORD}
       - ACCEPT_EULA=Y
-      - MSSQL_DATABASE=UrlShortenerDb  
     ports:
       - "1433:1433"
-   
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - banco-network
+
+volumes:
+  sqlserver_data:
+
+
+networks:
+  banco-network:
+    driver: bridge
