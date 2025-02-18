@@ -1,9 +1,19 @@
 {
   "version": 2,
+  "builds": [
+    {
+      "src": "Dockerfile",
+      "use": "@vercel/docker"
+    }
+  ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "src": "/api/urlshortener",
+      "dest": "/api/urlshortener"
+    },
+    {
+      "src": "/api/urlshortener/(.*)",
+      "dest": "/api/urlshortener/$1"
     }
   ]
 }
