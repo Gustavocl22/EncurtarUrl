@@ -38,5 +38,5 @@ jobs:
 
       - name: Construir e enviar imagem Docker
         run: |
-          docker build -t meu-usuario/meu-projeto:latest .
-          docker push meu-usuario/meu-projeto:latest
+          docker build -t gustavocl22/UrlShortenerApi:latest .
+          docker push gustavocl22/UrlShortenerApi:latest
