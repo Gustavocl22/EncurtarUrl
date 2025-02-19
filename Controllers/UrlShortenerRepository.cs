@@ -9,7 +9,7 @@ public class UrlShortenerRepository : IUrlShortenerRepository
         _context = context;
     }
 
-    public async Task<UrlShortener?> GetUrlByIdAsync(int id)  // Retorno nulo permitido
+    public async Task<UrlShortener> GetUrlByIdAsync(int id)
     {
         return await _context.UrlShorteners.FindAsync(id);
     }
@@ -19,12 +19,12 @@ public class UrlShortenerRepository : IUrlShortenerRepository
         return await _context.UrlShorteners.ToListAsync();
     }
 
-    public async Task<UrlShortener?> GetUrlByOriginalUrlAsync(string originalUrl)  // Retorno nulo permitido
+    public async Task<UrlShortener> GetUrlByOriginalUrlAsync(string originalUrl)
     {
         return await _context.UrlShorteners.FirstOrDefaultAsync(u => u.OriginalUrl == originalUrl);
     }
 
-    public async Task<UrlShortener?> GetUrlByShortenedUrlAsync(string shortenedUrl)  // Retorno nulo permitido
+    public async Task<UrlShortener> GetUrlByShortenedUrlAsync(string shortenedUrl)
     {
         return await _context.UrlShorteners.FirstOrDefaultAsync(u => u.ShortenedUrl == shortenedUrl);
     }
