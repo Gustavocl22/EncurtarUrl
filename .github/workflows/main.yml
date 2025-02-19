@@ -38,5 +38,6 @@ jobs:
 
       - name: Construir e enviar imagem Docker
         run: |
-          docker build -t gustavocl22/urlshortenerapi:latest .
-          docker push gustavocl22/urlshortenerapi:latest
+         docker build -t gustavocl22/urlshortenerapi:latest -t gustavocl22/urlshortenerapi:${{ github.sha }} .
+         docker push gustavocl22/urlshortenerapi:latest
+         docker push gustavocl22/urlshortenerapi:${{ github.sha }}
