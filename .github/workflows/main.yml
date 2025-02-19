@@ -1,0 +1,42 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Instalar .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x' 
+
+      - name: Restaurar dependências
+        run: dotnet restore
+
+      - name: Compilar o projeto
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Rodar testes
+        run: dotnet test --no-build --configuration Release
+
+      - name: Login no Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Construir e enviar imagem Docker
+        run: |
+          docker build -t gustavocl22/urlshortenerapi:latest .
+          docker push gustavocl22/urlshortenerapi:latest
