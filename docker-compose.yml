@@ -9,29 +9,11 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=${DB_NAME};User Id=${DB_USER};Password=${DB_PASSWORD};TrustServerCertificate=True
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=${DB_CONNECTION_STRING}
       - ApiSettings__BaseUrl=${API_BASE_URL}
-    depends_on:
-      - sqlserver
     networks:
       - banco-network
-
-  sqlserver:
-    container_name: sqlserverdb
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    environment:
-      - MSSQL_SA_PASSWORD=${DB_PASSWORD}
-      - ACCEPT_EULA=Y
-    ports:
-      - "1433:1433"
-    volumes:
-      - sqlserver_data:/var/opt/mssql
-    networks:
-      - banco-network
-
-volumes:
-  sqlserver_data:
 
 networks:
   banco-network:
