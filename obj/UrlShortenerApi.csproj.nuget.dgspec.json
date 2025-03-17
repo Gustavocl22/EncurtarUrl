@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gustavo\\Desktop\\Shortenerurl\\UrlShortenerApi\\UrlShortenerApi.csproj": {}
+    "C:\\Users\\gu\\Desktop\\EncurtarUrl\\UrlShortenerApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Gustavo\\Desktop\\Shortenerurl\\UrlShortenerApi\\UrlShortenerApi.csproj": {
+    "C:\\Users\\gu\\Desktop\\EncurtarUrl\\UrlShortenerApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gustavo\\Desktop\\Shortenerurl\\UrlShortenerApi\\UrlShortenerApi.csproj",
+        "projectUniqueName": "C:\\Users\\gu\\Desktop\\EncurtarUrl\\UrlShortenerApi.csproj",
         "projectName": "UrlShortenerApi",
-        "projectPath": "C:\\Users\\Gustavo\\Desktop\\Shortenerurl\\UrlShortenerApi\\UrlShortenerApi.csproj",
-        "packagesPath": "C:\\Users\\Gustavo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gustavo\\Desktop\\Shortenerurl\\UrlShortenerApi\\obj\\",
+        "projectPath": "C:\\Users\\gu\\Desktop\\EncurtarUrl\\UrlShortenerApi.csproj",
+        "packagesPath": "C:\\Users\\gu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gu\\Desktop\\EncurtarUrl\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Gustavo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\gu\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -89,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.309/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.407/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
