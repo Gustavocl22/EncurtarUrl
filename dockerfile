@@ -1,29 +1,20 @@
-# Usar a imagem base do .NET SDK para compilar o projeto
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
 
-# Definir o diretório de trabalho no contêiner
-WORKDIR /app
+COPY ["./UrlShortenerApi/UrlShortenerApi.csproj", "UrlShortenerApi/"]
+RUN dotnet restore "./UrlShortenerApi/UrlShortenerApi.csproj"
 
-# Copiar o diretório inteiro de src/UrlShortenerApi para o contêiner
-COPY ./UrlShortenerApi /app/UrlShortenerApi
+COPY . .
+WORKDIR "/src/UrlShortenerApi"
+RUN dotnet build "UrlShortenerApi.csproj" -c Release -o /app/build
 
-# Restaurar dependências
-RUN dotnet restore /app/UrlShortenerApi/UrlShortenerApi.csproj
+FROM build AS publish
+RUN dotnet publish "UrlShortenerApi.csproj" -c Release -o /app/publish
 
-# Compilar o projeto
-RUN dotnet publish /app/UrlShortenerApi/UrlShortenerApi.csproj -c Release -o /app/publish
-
-# Usar a imagem base do .NET Runtime para produção
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
-
-# Definir o diretório de trabalho no contêiner
 WORKDIR /app
+COPY --from=publish /app/publish .
 
-# Copiar os arquivos publicados para a imagem final
-COPY --from=build /app/publish .
+EXPOSE 8080
 
-# Expor a porta 80
-EXPOSE 80
-
-# Comando para rodar a API
 ENTRYPOINT ["dotnet", "UrlShortenerApi.dll"]
