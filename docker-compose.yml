@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  app:
-    container_name: urlshortener-app
+  urlshortenerapi:
+    image: urlshortenerapi:latest
     build:
       context: .
       dockerfile: Dockerfile
@@ -10,11 +10,4 @@ services:
       - "8080:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ConnectionStrings__DefaultConnection=${DB_CONNECTION_STRING}
-      - ApiSettings__BaseUrl=${API_BASE_URL}
-    networks:
-      - banco-network
-
-networks:
-  banco-network:
-    driver: bridge
+    restart: always

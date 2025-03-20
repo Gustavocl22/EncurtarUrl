@@ -2,14 +2,15 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Carregar variáveis de ambiente do Docker Compose
+// Carregar variáveis de ambiente
 builder.Configuration.AddEnvironmentVariables();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-var apiBaseUrl = builder.Configuration["ApiSettings:BaseUrl"];
+var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL")
+                       ?? builder.Configuration["DefaultConnection"];
+
 
 Console.WriteLine($"ConnectionString: {connectionString}");
-Console.WriteLine($"API Base URL: {apiBaseUrl}");
+
 
 // Configuração do banco de dados
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -21,7 +22,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAll",
         policy =>
         {
-            policy.WithOrigins("http://localhost:5173")
+            policy.AllowAnyOrigin()
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
