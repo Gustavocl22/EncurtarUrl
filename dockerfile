@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 
-COPY ["/src/UrlShortenerApi.csproj", "UrlShortenerApi/"]
+COPY ["./UrlShortenerApi.csproj", "UrlShortenerApi/"]
 RUN dotnet restore "./UrlShortenerApi/UrlShortenerApi.csproj"
 
 COPY . .
