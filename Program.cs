@@ -8,9 +8,7 @@ builder.Configuration.AddEnvironmentVariables();
 var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL")
                        ?? builder.Configuration["DefaultConnection"];
 
-
 Console.WriteLine($"ConnectionString: {connectionString}");
-
 
 // Configuração do banco de dados
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -38,5 +36,8 @@ app.UseCors("AllowAll");
 app.MapControllers();
 
 app.UseAuthorization();
+
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+app.Urls.Add($"http://0.0.0.0:{port}");
 
 app.Run();
