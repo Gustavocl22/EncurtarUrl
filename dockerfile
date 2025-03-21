@@ -3,7 +3,7 @@ WORKDIR /src
 
 COPY ["./UrlShortenerApi.csproj", "UrlShortenerApi/"]
 WORKDIR /UrlShortenerApi
-RUN dotnet restore "UrlShortenerApi.csproj"
+RUN dotnet restore "./UrlShortenerApi.csproj"
 
 
 COPY . .
