@@ -7,7 +7,7 @@ services:
       - "5000:5000"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=${DB_NAME};User Id=${DB_USER};Password=${DB_PASSWORD};TrustServerCertificate=True
+      - ConnectionStrings__DefaultConnection=Server=db;Database=${DB_NAME};User Id=${DB_USER};Password=${DB_PASSWORD};TrustServerCertificate=True
     depends_on:
       - db
     env_file:
@@ -23,7 +23,7 @@ services:
     ports:
       - "1433:1433"
     volumes:
-      - sqlserverdata:/var/opt/mssql
+      - dbdata:/var/opt/mssql
 
 volumes:
   sqlserverdata:
