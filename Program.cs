@@ -18,10 +18,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost",
+    options.AddPolicy("AllowAnyOrigin",
         policy =>
         {
-            policy.WithOrigins("http://localhost:5173")
+            policy.WithOrigins("http://localhost:5173" ,"https://encurtarurl.onrender.com/api/urlshortener")
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
@@ -32,7 +32,7 @@ builder.Services.AddScoped<IUrlShortenerRepository, UrlShortenerRepository>();
 
 var app = builder.Build();
 
-app.UseCors("AllowLocalhost");
+app.UseCors("AllowAnyOrigin");
 
 app.MapControllers();
 
