@@ -1,18 +1,20 @@
 # Etapa de build
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+WORKDIR /app
+EXPOSE 80
+
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-
-# Copia o projeto e restaura dependências
-COPY ["UrlShortenerApi.csproj", "./"]
-RUN dotnet restore
-
-# Copia todo o código
+COPY ["EncurtarUrl/UrlShortenerApi/UrlShortenerApi.csproj", "EncurtarUrl/UrlShortenerApi/"]
+RUN dotnet restore "EncurtarUrl/UrlShortenerApi/UrlShortenerApi.csproj"
 COPY . .
-RUN dotnet publish -c Release -o /app/publish
+WORKDIR "/src/EncurtarUrl/UrlShortenerApi"
+RUN dotnet build "UrlShortenerApi.csproj" -c Release -o /app/build
 
-# Etapa final
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+FROM build AS publish
+RUN dotnet publish "UrlShortenerApi.csproj" -c Release -o /app/publish
+
+FROM base AS final
 WORKDIR /app
-COPY --from=build /app/publish .
-
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "UrlShortenerApi.dll"]
