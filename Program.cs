@@ -17,7 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",
+    options.AddPolicy("AllowLocalhost",
         policy =>
         {
             policy.WithOrigins("http://localhost:5173")
@@ -31,7 +31,7 @@ builder.Services.AddScoped<IUrlShortenerRepository, UrlShortenerRepository>();
 
 var app = builder.Build();
 
-app.UseCors("AllowAll");
+app.UseCors("AllowLocalhost");
 
 app.MapControllers();
 
