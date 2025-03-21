@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAnyOrigin",
         policy =>
         {
-            policy.WithOrigins("http://localhost:5173" ,"https://encurtarurl.onrender.com")
+            policy.WithOrigins("http://localhost:5173" ,"https://encurtarurl.onrender.com/api/urlshortener")
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
