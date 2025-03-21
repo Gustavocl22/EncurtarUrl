@@ -26,5 +26,4 @@ services:
       - dbdata:/var/opt/mssql
 
 volumes:
-  sqlserverdata:
-
+  dbdata:
