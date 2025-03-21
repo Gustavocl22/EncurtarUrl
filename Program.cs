@@ -35,6 +35,9 @@ app.UseCors("AllowAll");
 
 app.MapControllers();
 
+app.UseSwagger();
+app.UseSwaggerUI();
+
 app.UseAuthorization();
 
 app.Run();
