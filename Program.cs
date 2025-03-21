@@ -5,10 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Carregar variáveis de ambiente
 builder.Configuration.AddEnvironmentVariables();
 
-var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL")
-                       ?? builder.Configuration["DefaultConnection"];
-
-Console.WriteLine($"ConnectionString: {connectionString}");
+var connectionString = builder.Configuration["DefaultConnection"];
 
 // Configuração do banco de dados
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
