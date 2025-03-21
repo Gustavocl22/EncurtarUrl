@@ -5,7 +5,7 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["src/UrlShortenerApi/UrlShortenerApi.csproj", "EncurtarUrl/UrlShortenerApi/"]
+COPY ["./UrlShortenerApi/UrlShortenerApi.csproj", "EncurtarUrl/UrlShortenerApi/"]
 RUN dotnet restore "EncurtarUrl/UrlShortenerApi/UrlShortenerApi.csproj"
 COPY . .
 WORKDIR "/src/EncurtarUrl/UrlShortenerApi"
