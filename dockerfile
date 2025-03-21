@@ -1,22 +1,22 @@
-# Etapa base
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-WORKDIR /app
-EXPOSE 5000
-
-# Etapa de build
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+# Use a imagem base do SDK do .NET para construir a aplicação
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 
-COPY UrlShortenerApi.csproj ./ 
-RUN dotnet restore "UrlShortenerApi.csproj"
+# Copie os arquivos do projeto e restaure as dependências
+COPY *.csproj .
+RUN dotnet restore
 
-COPY . . 
-RUN dotnet build "UrlShortenerApi.csproj" -c Release -o /app/build
+# Copie todo o código e construa a aplicação
+COPY . .
+RUN dotnet publish -c Release -o /app/publish
 
-FROM build AS publish
-RUN dotnet publish "UrlShortenerApi.csproj" -c Release -o /app/publish
-
-FROM base AS final
+# Use a imagem base do runtime do .NET para rodar a aplicação
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
 WORKDIR /app
-COPY --from=publish /app/publish . 
-ENTRYPOINT ["dotnet", "UrlShortenerApi.dll"]
+COPY --from=build /app/publish .
+
+# Defina a porta que a aplicação vai usar
+EXPOSE 80
+
+# Comando para rodar a aplicação
+ENTRYPOINT ["dotnet", "UrlshortenerApi.dll"]

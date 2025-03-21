@@ -2,28 +2,24 @@ version: '3.8'
 
 services:
   api:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "5000:5000"
+      - "80:80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ConnectionStrings__DefaultConnection=Server=db;Database=${DB_NAME};User Id=${DB_USER};Password=${DB_PASSWORD};TrustServerCertificate=True
     depends_on:
       - db
-    env_file:
-      - .env
-
+   
   db:
     image: mcr.microsoft.com/mssql/server:2022-latest
     restart: always
     environment:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "${DB_PASSWORD}"
-      MSSQL_DATABASE: "${DB_NAME}"
+      
     ports:
       - "1433:1433"
-    volumes:
-      - dbdata:/var/opt/mssql
-
-volumes:
-  dbdata:
+    
