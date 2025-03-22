@@ -1,22 +1,12 @@
-# Use a imagem base do SDK do .NET para construir a aplicação
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /src
-
-# Copie os arquivos do projeto e restaure as dependências
-COPY *.csproj .
-RUN dotnet restore
-
-# Copie todo o código e construa a aplicação
-COPY . .
-RUN dotnet publish -c Release -o /app/publish
-
-# Use a imagem base do runtime do .NET para rodar a aplicação
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
-COPY --from=build /app/publish .
+COPY . ./
+RUN dotnet restore
+RUN dotnet publish -c Release -o out
 
-# Defina a porta que a aplicação vai usar
-EXPOSE 80
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+WORKDIR /app
+COPY --from=build /app/out ./
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "UrlShortener.dll"]
 
-# Comando para rodar a aplicação
-ENTRYPOINT ["dotnet", "UrlshortenerApi.dll"]
