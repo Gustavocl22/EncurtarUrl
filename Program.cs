@@ -41,4 +41,3 @@ app.UseAuthorization();
 app.Run();
 
 
-app.MapGet("/api/url", () => "Hello, Render!");
