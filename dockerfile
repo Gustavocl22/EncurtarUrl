@@ -8,7 +8,7 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["UriShortenerApi.csproj", "./"]
+COPY ["./UriShortenerApi.csproj", "./"]
 RUN dotnet restore "./UriShortenerApi.csproj"
 COPY . .
 
