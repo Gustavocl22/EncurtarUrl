@@ -18,7 +18,7 @@ services:
   sql-server:
     image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
-      - "MSSQL_SA_PASSWORD=QziiCRLrW#123"
+      - "MSSQL_SA_PASSWORD=${DB_PASSWORD}"
       - "ACCEPT_EULA=Y"
     networks:
       pessoa-networks:
