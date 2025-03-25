@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  pessoa-api:
+    container_name: pessoa-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5050:8080"  
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - sql-server
+    networks: 
+      - pessoa-networks
+
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - "MSSQL_SA_PASSWORD=QziiCRLrW#123"
+      - "ACCEPT_EULA=Y"
+    networks:
+      pessoa-networks:
+        aliases:
+          - "sql"
+
+networks:
+  pessoa-networks:
+    driver: bridge
