@@ -7,9 +7,11 @@ builder.Configuration.AddEnvironmentVariables();
 
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+    .Replace("${DB_SERVER}", Environment.GetEnvironmentVariable("DB_SERVER"))
     .Replace("${DB_NAME}", Environment.GetEnvironmentVariable("DB_NAME"))
     .Replace("${DB_USER}", Environment.GetEnvironmentVariable("DB_USER"))
     .Replace("${DB_PASSWORD}", Environment.GetEnvironmentVariable("DB_PASSWORD"));
+
 
 // Configuração do banco de dados
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
