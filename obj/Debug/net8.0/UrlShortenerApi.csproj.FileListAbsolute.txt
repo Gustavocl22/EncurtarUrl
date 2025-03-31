@@ -344,3 +344,5 @@ C:\Users\gu\Desktop\EncurtarUrl\obj\Debug\net8.0\refint\UrlShortenerApi.dll
 C:\Users\gu\Desktop\EncurtarUrl\obj\Debug\net8.0\UrlShortenerApi.pdb
 C:\Users\gu\Desktop\EncurtarUrl\obj\Debug\net8.0\UrlShortenerApi.genruntimeconfig.cache
 C:\Users\gu\Desktop\EncurtarUrl\obj\Debug\net8.0\ref\UrlShortenerApi.dll
+C:\Users\gu\Desktop\EncurtarUrl\bin\Debug\net8.0\Npgsql.dll
+C:\Users\gu\Desktop\EncurtarUrl\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
