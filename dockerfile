@@ -1,22 +1,12 @@
-# Usando a imagem oficial do .NET runtime
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-WORKDIR /app
-EXPOSE 8080
-
-# Copiando e publicando a aplicação
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
-COPY ["UrlShortenerApi.csproj", "."]
-RUN dotnet restore "UrlShortenerApi.csproj"
-COPY . .
-WORKDIR "/src"
-RUN dotnet build "UrlShortenerApi.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "UrlShortenerApi.csproj" -c Release -o /app/publish
-
-# Construindo a imagem final
-FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "UrlShortenerApi.dll"]
+COPY . ./
+RUN dotnet restore
+RUN dotnet publish -c Release -o out
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+WORKDIR /app
+COPY --from=build /app/out ./
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "UrlShortener.dll"]
+
