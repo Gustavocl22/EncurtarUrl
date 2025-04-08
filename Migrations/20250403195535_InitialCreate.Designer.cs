@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace UrlShortenerApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250210125531_InitialCreate")]
+    [Migration("20250403195535_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
