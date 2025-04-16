@@ -1,0 +1,44 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  projectPath: 'UrlShortenerApi.csproj'
+
+steps:
+- powershell: Remove-Item -Recurse -Force bin, obj
+  displayName: 'Limpar bin/obj'
+
+- task: UseDotNet@2
+  displayName: 'Instalar .NET SDK'
+  inputs:
+    version: '8.0.x'  # Atualize conforme o projeto
+
+- task: DotNetCoreCLI@2
+  displayName: 'Restaurar pacotes'
+  inputs:
+    command: 'restore'
+    projects: '$(projectPath)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build'
+  inputs:
+    command: 'build'
+    projects: '$(projectPath)'
+    arguments: '--configuration $(buildConfiguration) --no-restore'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Publicar'
+  inputs:
+    command: 'publish'
+    projects: '$(projectPath)'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: true
