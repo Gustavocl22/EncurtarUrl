@@ -15,7 +15,7 @@ variables:
 
 steps:
 - powershell: Remove-Item -Recurse -Force bin, obj
-  displayName: 'Limpar bin/obj'
+  displayName: 'clear bin/obj'
 
 - task: UseDotNet@2
   displayName: 'Instalar .NET SDK'
