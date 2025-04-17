@@ -11,34 +11,24 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  projectPath: 'UrlShortenerApi.csproj'
 
 steps:
-- powershell: Remove-Item -Recurse -Force bin, obj
-  displayName: 'clear bin/obj'
-
 - task: UseDotNet@2
   displayName: 'Instalar .NET SDK'
   inputs:
     version: '8.0.x'  
 
 - task: DotNetCoreCLI@2
-  displayName: 'Restaurar pacotes'
-  inputs:
-    command: 'restore'
-    projects: '$(projectPath)'
-
-- task: DotNetCoreCLI@2
-  displayName: 'Build'
+  displayName: 'Build e Restaurar'
   inputs:
     command: 'build'
-    projects: '$(projectPath)'
-    arguments: '--configuration $(buildConfiguration) --no-restore'
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration) --no-incremental'
 
 - task: DotNetCoreCLI@2
   displayName: 'Publicar'
   inputs:
     command: 'publish'
-    projects: '$(projectPath)'
+    projects: '**/*.csproj'
     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: true
