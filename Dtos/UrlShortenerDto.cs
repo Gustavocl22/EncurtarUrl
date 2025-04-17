@@ -1,4 +1,4 @@
 public class UrlShortenerDto
 {
-    public string OriginalUrl { get; set; }
+    public required string OriginalUrl { get; set; }
 }

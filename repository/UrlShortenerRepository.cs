@@ -9,7 +9,7 @@ public class UrlShortenerRepository : IUrlShortenerRepository
         _context = context;
     }
 
-    public async Task<UrlShortener> GetUrlByIdAsync(int id)
+    public async Task<UrlShortener?> GetUrlByIdAsync(int id)
     {
         return await _context.UrlShorteners.FindAsync(id);
     }
@@ -19,12 +19,12 @@ public class UrlShortenerRepository : IUrlShortenerRepository
         return await _context.UrlShorteners.ToListAsync();
     }
 
-    public async Task<UrlShortener> GetUrlByOriginalUrlAsync(string originalUrl)
+    public async Task<UrlShortener?> GetUrlByOriginalUrlAsync(string originalUrl)
     {
         return await _context.UrlShorteners.FirstOrDefaultAsync(u => u.OriginalUrl == originalUrl);
     }
 
-    public async Task<UrlShortener> GetUrlByShortenedUrlAsync(string shortenedUrl)
+    public async Task<UrlShortener?> GetUrlByShortenedUrlAsync(string shortenedUrl)
     {
         return await _context.UrlShorteners.FirstOrDefaultAsync(u => u.ShortenedUrl == shortenedUrl);
     }
@@ -37,6 +37,7 @@ public class UrlShortenerRepository : IUrlShortenerRepository
     public async Task DeleteUrlShortenerAsync(UrlShortener urlShortener)
     {
         _context.UrlShorteners.Remove(urlShortener);
+        await Task.CompletedTask;
     }
 
     public async Task SaveChangesAsync()
