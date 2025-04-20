@@ -1,0 +1,59 @@
+trigger:
+  branches:
+    include:
+    - develop
+    - release
+    - stage
+    - main
+  paths:
+    exclude:
+    - azure-pipelines.yml
+    - SQL/*
+
+name: '$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)'
+
+pool:
+  name: 'Default'
+
+steps:
+  - task: UseDotNet@2
+    displayName: 'Instalando recursos'
+    inputs:
+      version: '8.0.x'
+
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Restaurando projeto'
+    inputs:
+      command: restore
+      projects: '**/*.csproj'
+      feedsToUse: 'config'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Construindo projeto'
+    inputs:
+      command: build
+      projects: '**/*.csproj'
+      arguments: '--configuration Release'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Testando projeto'
+    inputs:
+      command: test
+      projects: '**/*Tests/*.csproj'
+      arguments: '--configuration Release'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Copiando arquivos'
+    inputs:
+      command: publish
+      publishWebProjects: True
+      arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
+      zipAfterPublish: True
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Criando artefato'
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)'
+      artifact: 'drop'
+      publishLocation: 'pipeline'
