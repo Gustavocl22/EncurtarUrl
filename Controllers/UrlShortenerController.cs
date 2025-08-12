@@ -62,7 +62,7 @@ public class UrlShortenerController : ControllerBase
         await _repository.AddUrlShortenerAsync(urlShortener);
         await _repository.SaveChangesAsync();
 
-        return Ok(new { id = urlShortener.Id, shortenedUrl = urlShortener.ShortenedUrl });  // Retorne o ID também
+        return Ok(new { id = urlShortener.Id, shortenedUrl = urlShortener.ShortenedUrl });
     }
 
     // DELETE: api/urlshortener/{id}
