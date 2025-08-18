@@ -18,10 +18,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost",
+    options.AddPolicy("AllowFrontend",
         policy =>
         {
-            policy.WithOrigins("http://localhost:5173")
+            policy.WithOrigins("https://gustavocl22.github.io")
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
@@ -31,7 +31,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IUrlShortenerRepository, UrlShortenerRepository>();
 
 var app = builder.Build();
-app.UseCors("AllowLocalhost");
+app.UseCors("AllowFrontend");
 app.MapControllers();
 
 using (var scope = app.Services.CreateScope())
