@@ -16,12 +16,14 @@ var connectionString = $"Host={dbServer};Port={dbPort};Database={dbName};Usernam
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 
+var allowedOrigin = Environment.GetEnvironmentVariable("FRONTEND_URL") ?? "https://gustavocl22.github.io";
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
         policy =>
         {
-            policy.WithOrigins("https://gustavocl22.github.io")
+            policy.WithOrigins(allowedOrigin)
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
