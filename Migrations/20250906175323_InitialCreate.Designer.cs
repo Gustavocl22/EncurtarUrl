@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace UrlShortenerApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250807143410_InitialCreate")]
+    [Migration("20250906175323_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
