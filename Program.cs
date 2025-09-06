@@ -30,6 +30,10 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ApiKeyGlobalFilter>();
+});
 builder.Services.AddScoped<IUrlShortenerRepository, UrlShortenerRepository>();
 
 var app = builder.Build();
