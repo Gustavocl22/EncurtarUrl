@@ -16,7 +16,7 @@ var connectionString = $"Host={dbServer};Port={dbPort};Database={dbName};Usernam
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 
-var allowedOrigin = Environment.GetEnvironmentVariable("FRONTEND_URL") ?? "https://gustavocl22.github.io";
+var allowedOrigin = Environment.GetEnvironmentVariable("FRONTEND_URL") ?? "https://encurtador-front-eta.vercel.app";
 
 builder.Services.AddCors(options =>
 {

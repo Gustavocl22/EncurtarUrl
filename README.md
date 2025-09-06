@@ -1,6 +1,6 @@
 # 🔗 Encurtador de URLs
 
-🔗 Acesse o encurtador online: [https://gustavocl22.github.io/Encurtador-Front/](https://gustavocl22.github.io/Encurtador-Front/)
+🔗 Acesse o encurtador online: [https://encurtador-front-eta.vercel.app](https://encurtador-front-eta.vercel.app)
 
 Projeto de encurtador de URLs desenvolvido em ASP.NET Core, com Entity Framework Core e banco de dados PostgreSQL hospedado no Render.
 
