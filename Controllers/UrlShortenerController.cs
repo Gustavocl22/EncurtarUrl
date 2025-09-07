@@ -85,21 +85,4 @@ public class UrlShortenerController : ControllerBase
     {
         return Guid.NewGuid().ToString().Substring(0, 8);
     }
-
-    // Endpoint para editar a URL original de uma URL encurtada
-        [HttpPut("{id}")]
-        public async Task<IActionResult> EditarUrl(int id, [FromBody] UrlShortenerDto dto)
-        {
-            var url = await _repository.GetUrlByIdAsync(id);
-            if (url == null)
-                return NotFound();
-
-            url.OriginalUrl = dto.OriginalUrl;
-            if (!string.IsNullOrEmpty(dto.ShortenedUrl))
-                url.ShortenedUrl = dto.ShortenedUrl;
-
-            await _repository.SaveChangesAsync();
-
-            return Ok(url);
-        }
 }
