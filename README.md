@@ -28,7 +28,7 @@ Projeto de encurtador de URLs desenvolvido em ASP.NET Core, com Entity Framework
    DB_USER=seu_usuario
    DB_PASSWORD=sua_senha
    DB_SERVER=host.render.com
-   DB_PORT=5432
+   DB_PORT=1234
    ```
 3. Restaure os pacotes:
    ```sh
@@ -54,7 +54,6 @@ Projeto de encurtador de URLs desenvolvido em ASP.NET Core, com Entity Framework
 - As credenciais do banco ficam no `.env` (não suba para o GitHub).
 - O arquivo `.gitignore` já está configurado para proteger `.env`, `appsettings.json` e outros arquivos sensíveis, evitando que informações privadas sejam enviadas para o GitHub.
 - O CORS está configurado para aceitar apenas o domínio do frontend.
-- Todas as rotas da API estão protegidas por uma API Key. Para acessar, é obrigatório enviar o header `X-API-KEY` com o valor definido na variável de ambiente `API_KEY` do backend. Assim, apenas clientes autorizados conseguem consumir a API.
 
 ## 📚 Principais Rotas da API
 - `POST /api/urlshortener` — Encurta uma URL
